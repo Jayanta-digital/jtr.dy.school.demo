@@ -1,0 +1,100 @@
+
+
+{
+  "_instructions": "VERSION: HOSTED IMAGES — Upload images to demo/yourschool/ folder on InfinityFree, then use paths below",
+  "_folderStructure": [
+    "demo/",
+    "  kamrup/",
+    "    config.json      ← this file",
+    "    logo.png         ← school logo",
+    "    hero1.jpg        ← banner image 1",
+    "    hero2.jpg        ← banner image 2",
+    "    hero3.jpg        ← banner image 3",
+    "    principal.jpg    ← principal photo",
+    "    g1.jpg           ← gallery photo 1",
+    "    g2.jpg           ← gallery photo 2",
+    "    g3.jpg           ← gallery photo 3",
+    "    g4.jpg           ← gallery photo 4",
+    "    g5.jpg           ← gallery photo 5",
+    "    g6.jpg           ← gallery photo 6"
+  ],
+  "_imageTips": [
+    "Logo:    PNG with transparent background preferred, any size",
+    "Hero:    Landscape photo, minimum 1200px wide, JPG",
+    "Gallery: Any size, JPG or PNG",
+    "Principal: Square or portrait photo, JPG"
+  ],
+
+  "name":          "Kamrup Public School",
+  "nameAssamese":  "কামৰূপ পাব্লিক স্কুল",
+  "shortName":     "KPS",
+  "established":   2002,
+  "taglineEn":     "Knowledge is Power",
+  "tagline":       "জ্ঞানেই শক্তি",
+  "type":          "Private English Medium School",
+  "district":      "Kamrup",
+  "state":         "Assam",
+  "affiliation":   "SEBA Assam",
+  "code":          "SCH2002",
+
+  "contact": {
+    "address": "NH-27, Near DC Office, Kamrup, Assam – 781001",
+    "phone":   "+91 98765 43210",
+    "phone2":  "+91 94350 11111",
+    "email":   "info@kamruppublicschool.com"
+  },
+
+  "mapEmbedUrl": "https://www.google.com/maps/embed?pb=YOUR_EMBED_URL_HERE",
+
+  "_mapHelp": [
+    "1. Go to maps.google.com",
+    "2. Search your school location",
+    "3. Click Share → Embed a map",
+    "4. Copy ONLY the URL inside src='...' → paste above"
+  ],
+
+  "logo": {
+    "_note": "Path relative to website root. Image must be uploaded to this exact path.",
+    "url":          "demo/kamrup/logo.png",
+    "textFallback": "KPS"
+  },
+
+  "heroImages": [
+    { "url": "demo/kamrup/hero1.jpg", "caption": "Welcome to Kamrup Public School" },
+    { "url": "demo/kamrup/hero2.jpg", "caption": "Excellence in Education Since 2002" },
+    { "url": "demo/kamrup/hero3.jpg", "caption": "Building Tomorrow's Leaders" }
+  ],
+
+  "gallery": [
+    { "url": "demo/kamrup/g1.jpg", "caption": "Annual Sports Day" },
+    { "url": "demo/kamrup/g2.jpg", "caption": "Science Exhibition" },
+    { "url": "demo/kamrup/g3.jpg", "caption": "Cultural Programme" },
+    { "url": "demo/kamrup/g4.jpg", "caption": "Classroom Learning" },
+    { "url": "demo/kamrup/g5.jpg", "caption": "Independence Day" },
+    { "url": "demo/kamrup/g6.jpg", "caption": "Annual Function" }
+  ],
+
+  "stats": [
+    { "label": "Total Students",   "value": 540, "suffix": "+", "icon": "👨‍🎓" },
+    { "label": "Pass Percentage",  "value": 97,  "suffix": "%", "icon": "📊" },
+    { "label": "Teaching Staff",   "value": 28,  "suffix": "+", "icon": "👩‍🏫" },
+    { "label": "Years of Service", "value": 23,  "suffix": "+", "icon": "🏅" }
+  ],
+
+  "headmaster": {
+    "name":          "Mr. Rajib Kalita",
+    "designation":   "Principal",
+    "qualification": "M.A., B.Ed.",
+    "experience":    "18+ Years",
+    "photoSource":   "hosted",
+    "drivePhotoLink": "",
+    "hostedPath":    "demo/kamrup/principal.jpg",
+    "message": "Dear Students, Parents & Well-wishers,\n\nWelcome to Kamrup Public School. For over two decades, we have been committed to delivering quality education with values.\n\nOur dedicated faculty works tirelessly to ensure every student reaches their full potential.\n\nWith warm regards,"
+  },
+
+  "social": {
+    "facebook": "https://facebook.com/yourpage",
+    "youtube":  "https://youtube.com/yourchannel",
+    "twitter":  "#"
+  }
+  }
