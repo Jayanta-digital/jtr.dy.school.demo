@@ -1,0 +1,93 @@
+{
+  "_instructions": "VERSION: GOOGLE DRIVE — Paste your Drive share links below",
+  "_howToGetDriveLink": [
+    "1. Open Google Drive",
+    "2. Right-click your image/file → Share",
+    "3. Set to 'Anyone with the link can view'",
+    "4. Click 'Copy link' → paste below"
+  ],
+
+  "name":          "Kamrup Public School",
+  "nameAssamese":  "কামৰূপ পাব্লিক স্কুল",
+  "shortName":     "KPS",
+  "established":   2002,
+  "taglineEn":     "Knowledge is Power",
+  "tagline":       "জ্ঞানেই শক্তি",
+  "type":          "Private English Medium School",
+  "district":      "Kamrup",
+  "state":         "Assam",
+  "affiliation":   "SEBA Assam",
+  "code":          "SCH2002",
+
+  "contact": {
+    "address": "NH-27, Near DC Office, Kamrup, Assam – 781001",
+    "phone":   "+91 98765 43210",
+    "phone2":  "+91 94350 11111",
+    "email":   "info@kamruppublicschool.com"
+  },
+
+  "mapEmbedUrl": "https://www.google.com/maps/embed?pb=YOUR_EMBED_URL_HERE",
+
+  "_mapHelp": [
+    "1. Go to maps.google.com",
+    "2. Search your school location",
+    "3. Click Share → Embed a map",
+    "4. Copy ONLY the URL inside src='...' → paste above"
+  ],
+
+  "logo": {
+    "_note": "Paste your logo Google Drive share link below",
+    "driveLink":    "https://drive.google.com/file/d/YOUR_LOGO_FILE_ID/view",
+    "textFallback": "KPS"
+  },
+
+  "heroImages": [
+    {
+      "_note": "Front view of school building",
+      "url":     "https://drive.google.com/file/d/YOUR_HERO1_FILE_ID/view",
+      "caption": "Welcome to Kamrup Public School"
+    },
+    {
+      "_note": "Classroom or event photo",
+      "url":     "https://drive.google.com/file/d/YOUR_HERO2_FILE_ID/view",
+      "caption": "Excellence in Education Since 2002"
+    },
+    {
+      "_note": "Students or campus photo",
+      "url":     "https://drive.google.com/file/d/YOUR_HERO3_FILE_ID/view",
+      "caption": "Building Tomorrow's Leaders"
+    }
+  ],
+
+  "gallery": [
+    { "url": "https://drive.google.com/file/d/YOUR_GALLERY1_ID/view", "caption": "Annual Sports Day" },
+    { "url": "https://drive.google.com/file/d/YOUR_GALLERY2_ID/view", "caption": "Science Exhibition" },
+    { "url": "https://drive.google.com/file/d/YOUR_GALLERY3_ID/view", "caption": "Cultural Programme" },
+    { "url": "https://drive.google.com/file/d/YOUR_GALLERY4_ID/view", "caption": "Classroom Learning" },
+    { "url": "https://drive.google.com/file/d/YOUR_GALLERY5_ID/view", "caption": "Independence Day" },
+    { "url": "https://drive.google.com/file/d/YOUR_GALLERY6_ID/view", "caption": "Annual Function" }
+  ],
+
+  "stats": [
+    { "label": "Total Students",   "value": 540, "suffix": "+", "icon": "👨‍🎓" },
+    { "label": "Pass Percentage",  "value": 97,  "suffix": "%", "icon": "📊" },
+    { "label": "Teaching Staff",   "value": 28,  "suffix": "+", "icon": "👩‍🏫" },
+    { "label": "Years of Service", "value": 23,  "suffix": "+", "icon": "🏅" }
+  ],
+
+  "headmaster": {
+    "name":          "Mr. Rajib Kalita",
+    "designation":   "Principal",
+    "qualification": "M.A., B.Ed.",
+    "experience":    "18+ Years",
+    "photoSource":   "drive",
+    "drivePhotoLink": "https://drive.google.com/file/d/YOUR_PRINCIPAL_PHOTO_ID/view",
+    "message": "Dear Students, Parents & Well-wishers,\n\nWelcome to Kamrup Public School. For over two decades, we have been committed to delivering quality education with values.\n\nOur dedicated faculty works tirelessly to ensure every student reaches their full potential.\n\nWith warm regards,"
+  },
+
+  "social": {
+    "facebook": "https://facebook.com/yourpage",
+    "youtube":  "https://youtube.com/yourchannel",
+    "twitter":  "#"
+  }
+}
