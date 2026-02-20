@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facilities | Naharkatia Primary School</title>
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <style>
+    .fac-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.25rem}
+    .fac-card{background:var(--c-white);border-radius:var(--r-lg);padding:1.75rem 1.25rem;text-align:center;box-shadow:var(--sh-md);border:1px solid var(--c-border);transition:all var(--tr);position:relative;overflow:hidden}
+    .fac-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-primary);transform:scaleX(0);transform-origin:left;transition:transform var(--tr)}
+    .fac-card:hover::before{transform:scaleX(1)}
+    .fac-card:hover{transform:translateY(-6px);box-shadow:var(--sh-xl)}
+    .fac-icon{font-size:3rem;margin-bottom:1rem;display:block}
+    .fac-title{font-family:var(--font-display);font-size:1.05rem;color:var(--c-primary-d);margin-bottom:.5rem}
+    .fac-desc{font-size:.8rem;color:var(--c-muted);line-height:1.65}
+  </style>
+</head>
+<body>
+<main>
+<div class="page-hero">
+  <div class="container page-hero__inner">
+    <div class="page-hero__badge">🏗️ Infrastructure</div>
+    <h1 class="page-hero__title">School Facilities</h1>
+    <p class="page-hero__sub">Modern infrastructure and resources supporting holistic learning</p>
+    <nav class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Facilities</span></nav>
+  </div>
+</div>
+<section class="page-section">
+  <div class="container">
+    <div class="sec-header"><span class="sec-badge">Our Infrastructure</span><h2 class="sec-title">What We Offer</h2><div class="divider"></div></div>
+    <div class="fac-grid" id="facGrid"></div>
+  </div>
+</section>
+</main>
+<script src="../config.js"></script>
+<script src="../dynamic-demo.js"></script>
+<script src="../components.js"></script>
+<script>
+const facilities=[
+  {icon:"📚",title:"Library",desc:"Rich collection of books, encyclopedias & reference materials in Assamese and English for all classes."},
+  {icon:"🎵",title:"Music & Extra-Curriculars",desc:"Bihu dance, folk music and cultural programme training. Inter-school competition participants."},
+  {icon:"⚽",title:"Playground",desc:"Spacious ground for football, kabaddi, athletics and physical education activities."},
+  {icon:"🖥️",title:"Smart Classroom",desc:"Digital board and projector-enabled interactive classroom for modern, engaging learning."},
+  {icon:"🍽️",title:"Mid-Day Meal (MDM)",desc:"PM POSHAN scheme providing nutritious free meals daily to all enrolled students."},
+  {icon:"🚰",title:"Clean Drinking Water",desc:"Filtered drinking water facility ensuring safe and clean water access for all students."},
+  {icon:"🏫",title:"Separate Toilets",desc:"Clean, functional separate toilet facilities for girls and boys as per Swachh Bharat norms."},
+  {icon:"🌿",title:"School Garden",desc:"Kitchen garden for hands-on environmental education and the school's Green Campus Initiative."},
+];
+document.addEventListener("DOMContentLoaded",()=>{
+  Components.init("Facilities");
+  const g=document.getElementById("facGrid");
+  g.innerHTML=facilities.map((f,i)=>`
+    <div class="fac-card reveal-up" style="transition-delay:${i*.07}s">
+      <span class="fac-icon">${f.icon}</span>
+      <div class="fac-title">${f.title}</div>
+      <p class="fac-desc">${f.desc}</p>
+    </div>
+  `).join("");
+  Components.initScrollReveal();
+});
+</script>
+</body>
+</html>

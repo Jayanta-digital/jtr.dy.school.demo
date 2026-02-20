@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | 66no. Radhakuchi LP School</title>
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <style>
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+    .contact-items{display:flex;flex-direction:column;gap:1rem}
+    .ci{display:flex;gap:1rem;align-items:flex-start;background:var(--c-white);border-radius:var(--r-md);padding:1rem 1.25rem;box-shadow:var(--sh-sm);border:1px solid var(--c-border)}
+    .ci__icon{width:46px;height:46px;border-radius:var(--r-md);background:var(--grad-primary);color:#fff;font-size:1.2rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ci__label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-muted);margin-bottom:3px}
+    .ci__value{font-size:.9rem;font-weight:500;color:var(--c-text)}
+    .map-wrap{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-md);height:240px;border:1px solid var(--c-border)}
+    .map-wrap iframe{width:100%;height:100%;border:none}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+    .form-group label{font-size:.8rem;font-weight:600;color:var(--c-text)}
+    .form-group input,
+    .form-group textarea{
+      padding:.65rem .9rem;border:1.5px solid var(--c-border);
+      border-radius:var(--r-md);font-size:.9rem;font-family:inherit;
+      color:var(--c-text);background:#fff;transition:border-color .2s;
+      outline:none;width:100%;box-sizing:border-box;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus{border-color:var(--c-primary)}
+    .form-group textarea{resize:vertical;min-height:110px}
+    .btn-submit{
+      width:100%;padding:.8rem;background:var(--grad-primary);
+      color:#fff;font-size:.95rem;font-weight:700;border:none;
+      border-radius:var(--r-md);cursor:pointer;transition:opacity .2s;font-family:inherit;
+    }
+    .btn-submit:hover{opacity:.88}
+    .btn-submit:disabled{opacity:.6;cursor:not-allowed}
+    @media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){.form-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main>
+<div class="page-hero">
+  <div class="container page-hero__inner">
+    <div class="page-hero__badge">📞 Reach Us</div>
+    <h1 class="page-hero__title">Contact Us</h1>
+    <p class="page-hero__sub">We'd love to hear from parents, students and visitors</p>
+    <nav class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Contact</span></nav>
+  </div>
+</div>
+<section class="page-section">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="contact-items reveal-left">
+          <div class="ci"><div class="ci__icon">📍</div><div><div class="ci__label">Address</div><div class="ci__value" id="addr"></div></div></div>
+          <div class="ci"><div class="ci__icon">📞</div><div><div class="ci__label">Phone</div><div class="ci__value" id="phone"></div></div></div>
+          <div class="ci"><div class="ci__icon">📧</div><div><div class="ci__label">Email</div><div class="ci__value" id="email"></div></div></div>
+          <div class="ci"><div class="ci__icon">⏰</div><div><div class="ci__label">Office Hours</div><div class="ci__value">Mon–Fri: 9:00 AM – 4:00 PM</div></div></div>
+          <div class="ci"><div class="ci__icon">🏫</div><div><div class="ci__label">School Code</div><div class="ci__value" id="code"></div></div></div>
+        </div>
+        <div class="map-wrap reveal-left" style="margin-top:1rem">
+          <iframe id="mapFrame" title="Location Map" allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" src=""></iframe>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div style="background:var(--c-white);border-radius:var(--r-lg);padding:2rem;box-shadow:var(--sh-md);border:1px solid var(--c-border)">
+          <h3 style="font-family:var(--font-display);font-size:1.2rem;color:var(--c-primary-d);margin-bottom:1.5rem">💬 Send Us a Message</h3>
+          <form id="contactForm" novalidate>
+            <!-- Formspree hidden fields -->
+            <input type="hidden" name="_subject" value="New Message from School Website">
+            <input type="hidden" name="_replyto" id="replyTo" value="">
+            <!-- Honeypot: stops spam bots -->
+            <input type="text" name="_gotcha" style="display:none">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name *</label>
+                <input type="text" name="name" placeholder="Full Name" required>
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" name="email" id="emailInput" placeholder="yourname@example.com">
+            </div>
+            <div class="form-group">
+              <label>Subject *</label>
+              <input type="text" name="subject" placeholder="e.g. Admission Inquiry" required>
+            </div>
+            <div class="form-group">
+              <label>Message *</label>
+              <textarea name="message" rows="4" placeholder="Write your message here..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">📨 Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<script src="../config.js"></script>
+<script src="../dynamic-demo.js"></script>
+<script src="../components.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  Components.init("Contact");
+  const c=SCHOOL_CONFIG;
+  document.getElementById("addr").textContent=c.contact.address;
+  document.getElementById("phone").textContent=c.contact.phone;
+  document.getElementById("email").textContent=c.contact.email;
+  document.getElementById("code").textContent=c.code;
+  if(c.mapEmbedUrl)document.getElementById("mapFrame").src=c.mapEmbedUrl;
+
+  document.getElementById("contactForm").addEventListener("submit",async function(e){
+    e.preventDefault();
+    // Copy email into replyto so you can reply directly to sender
+    document.getElementById("replyTo").value=document.getElementById("emailInput").value;
+    const btn=e.target.querySelector(".btn-submit");
+    btn.textContent="⏳ Sending...";
+    btn.disabled=true;
+    try{
+      const res=await fetch("https://formspree.io/f/mwvnqlld",{
+        method:"POST",
+        headers:{"Accept":"application/json"},
+        body:new FormData(e.target),
+      });
+      if(res.ok){
+        btn.textContent="✅ Message Received! We will respond soon.";
+        btn.style.background="linear-gradient(135deg,#166534,#22c55e)";
+        e.target.reset();
+        setTimeout(()=>{
+          btn.textContent="📨 Send Message";
+          btn.style.background="";
+          btn.disabled=false;
+        },4500);
+      }else{
+        throw new Error("failed");
+      }
+    }catch(err){
+      btn.textContent="❌ Failed. Please try again.";
+      btn.style.background="linear-gradient(135deg,#991b1b,#ef4444)";
+      btn.disabled=false;
+      setTimeout(()=>{
+        btn.textContent="📨 Send Message";
+        btn.style.background="";
+      },4000);
+    }
+  });
+});
+</script>
+</body>
+</html>

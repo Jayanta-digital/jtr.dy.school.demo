@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | 66no. B Radhakuchi JB School</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖼️</text></svg>">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/gallery.css">
+</head>
+<body>
+<main>
+<div class="page-hero">
+  <div class="container page-hero__inner">
+    <div class="page-hero__badge">📸 Visual Journey</div>
+    <h1 class="page-hero__title">Photo Gallery</h1>
+    <p class="page-hero__sub">Memories from our vibrant school life — events, activities and celebrations</p>
+    <nav class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Gallery</span></nav>
+  </div>
+</div>
+
+<section class="page-section">
+  <div class="container">
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-nav lb-nav--prev" id="lbPrev" aria-label="Previous">‹</button>
+  <div class="lb-inner">
+    <img class="lb-img" id="lbImg" src="" alt="">
+    <p class="lb-caption" id="lbCaption"></p>
+  </div>
+  <button class="lb-nav lb-nav--next" id="lbNext" aria-label="Next">›</button>
+</div>
+
+<script src="../config.js"></script>
+<script src="../dynamic-demo.js"></script>
+<script src="../components.js"></script>
+<script>
+let galleryItems = [];
+let lbIdx = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+  Components.init("Gallery");
+  loadGallery();
+  initLightbox();
+});
+
+function loadGallery() {
+  const grid = document.getElementById("galleryGrid");
+  if (!grid) return;
+
+  const cfg = SCHOOL_CONFIG.gallery;
+  // ✅ FIX: Use getGalleryImages() which handles driveFiles, hosted, and fallback
+  galleryItems = (typeof getGalleryImages === "function")
+    ? getGalleryImages()
+    : cfg.fallback;
+
+  // Show skeleton
+  grid.innerHTML = Array(6).fill(0).map(() =>
+    `<div class="gallery-item skeleton" style="height:200px;"></div>`
+  ).join("");
+
+  // Render
+  setTimeout(() => {
+    grid.innerHTML = galleryItems.map((img, i) => `
+      <div class="gallery-item reveal-up" style="transition-delay:${(i % 6) * .07}s" data-index="${i}">
+        <img src="${img.url}" alt="${esc(img.caption)}" loading="lazy"
+             onerror="this.closest('.gallery-item').style.display='none'">
+        <div class="gallery-item__overlay">
+          <div class="gallery-item__caption">📷 ${esc(img.caption)}</div>
+          <div class="gallery-item__icon">🔍</div>
+        </div>
+      </div>
+    `).join("");
+
+    grid.querySelectorAll(".gallery-item").forEach(item => {
+      item.addEventListener("click", () => openLB(+item.dataset.index));
+    });
+
+    Components.initScrollReveal();
+  }, 200);
+}
+
+function openLB(idx) {
+  lbIdx = idx;
+  const lb = document.getElementById("lightbox");
+  lb.classList.add("open");
+  document.body.style.overflow = "hidden";
+  updateLB();
+}
+
+function closeLB() {
+  document.getElementById("lightbox").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function updateLB() {
+  const img = galleryItems[lbIdx];
+  document.getElementById("lbImg").src = img.url;
+  document.getElementById("lbCaption").textContent = img.caption;
+}
+
+function initLightbox() {
+  document.getElementById("lbClose").addEventListener("click", closeLB);
+  document.getElementById("lightbox").addEventListener("click", e => { if (e.target === document.getElementById("lightbox")) closeLB(); });
+  document.getElementById("lbPrev").addEventListener("click", () => { lbIdx = (lbIdx - 1 + galleryItems.length) % galleryItems.length; updateLB(); });
+  document.getElementById("lbNext").addEventListener("click", () => { lbIdx = (lbIdx + 1) % galleryItems.length; updateLB(); });
+  document.addEventListener("keydown", e => {
+    const lb = document.getElementById("lightbox");
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLB();
+    if (e.key === "ArrowLeft") { lbIdx = (lbIdx - 1 + galleryItems.length) % galleryItems.length; updateLB(); }
+    if (e.key === "ArrowRight") { lbIdx = (lbIdx + 1) % galleryItems.length; updateLB(); }
+  });
+}
+</script>
+</body>
+</html>

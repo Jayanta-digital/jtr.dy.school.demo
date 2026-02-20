@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teachers | 66no. B Radhakuchi JB School</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👩‍🏫</text></svg>">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/teachers.css">
+</head>
+<body>
+<main>
+<div class="page-hero">
+  <div class="container page-hero__inner">
+    <div class="page-hero__badge">👩‍🏫 Our Educators</div>
+    <h1 class="page-hero__title">Teaching Staff</h1>
+    <p class="page-hero__sub">Meet the dedicated educators committed to every child's growth and learning</p>
+    <nav class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Teachers</span></nav>
+  </div>
+</div>
+
+<section class="page-section">
+  <div class="container">
+    <div class="sec-header">
+      <span class="sec-badge">Faculty</span>
+      <h2 class="sec-title">Teaching Faculty</h2>
+      <p class="sec-sub">Qualified, trained and committed to NEP 2020 guidelines</p>
+      <div class="divider"></div>
+    </div>
+    <div class="teachers-grid" id="teachersGrid"></div>
+  </div>
+</section>
+
+<section class="page-section page-section--alt">
+  <div class="container">
+    <div class="sec-header">
+      <span class="sec-badge">Support Team</span>
+      <h2 class="sec-title">Supporting Staff</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="staff-grid" id="staffGrid"></div>
+  </div>
+</section>
+</main>
+
+<script src="../config.js"></script>
+<script src="../dynamic-demo.js"></script>
+<script src="../components.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  Components.init("Teachers");
+  renderTeachers();
+  renderStaff();
+});
+
+function renderTeachers() {
+  const grid = document.getElementById("teachersGrid");
+  if (!grid) return;
+  grid.innerHTML = SCHOOL_CONFIG.teachers.map((t, i) => `
+    <div class="teacher-card reveal-up" style="transition-delay:${i * .08}s">
+      <div class="teacher-card__img-wrap">
+        <img src="${getTeacherPhotoUrl(t)}" alt="${esc(t.name)}" loading="lazy"
+             onerror="this.src='https://ui-avatars.com/api/?background=1a5276&color=fff&size=200&bold=true&name=${encodeURIComponent(t.name)}'">
+        <div class="teacher-card__overlay">
+          <div class="teacher-card__subject-tag">📚 ${esc(t.subject)}</div>
+        </div>
+      </div>
+      <div class="teacher-card__body">
+        <div class="teacher-card__desg">${esc(t.designation)}</div>
+        <h3 class="teacher-card__name">${esc(t.name)}</h3>
+        <div class="teacher-card__qual">🎓 ${esc(t.qualification)}</div>
+        <div class="teacher-card__exp">🕐 ${esc(t.experience)} Experience</div>
+      </div>
+    </div>
+  `).join("");
+  Components.initScrollReveal();
+}
+
+function renderStaff() {
+  const grid = document.getElementById("staffGrid");
+  if (!grid) return;
+  grid.innerHTML = SCHOOL_CONFIG.supportingStaff.map(s => `
+    <div class="staff-card reveal-up">
+      <div class="staff-card__avatar">
+        <img src="https://ui-avatars.com/api/?background=e8eff8&color=1a4a8a&size=150&bold=true&name=${encodeURIComponent(s.name)}"
+             alt="${esc(s.name)}" onerror="this.outerHTML='<span style=font-size:2rem>👤</span>'">
+      </div>
+      <div class="staff-card__name">${esc(s.name)}</div>
+      <div class="staff-card__role">${esc(s.designation)}</div>
+    </div>
+  `).join("");
+  Components.initScrollReveal();
+}
+</script>
+</body>
+</html>

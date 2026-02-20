@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academics | 66no. Radhakuchi LP School</title>
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <style>
+    .acad-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;margin-bottom:2.5rem}
+    .acad-card{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:1.75rem 1.25rem;background:var(--c-white);border-radius:var(--r-lg);border:1px solid var(--c-border);box-shadow:var(--sh-md);text-align:center;transition:all var(--tr);text-decoration:none;cursor:pointer;font-family:inherit}
+    .acad-card:hover{transform:translateY(-5px);box-shadow:var(--sh-xl);border-color:var(--c-primary)}
+    .acad-card__icon{font-size:2.5rem}
+    .acad-card__title{font-family:var(--font-display);font-size:1rem;color:var(--c-primary-d)}
+    .acad-card__desc{font-size:.76rem;color:var(--c-muted)}
+    .acad-card--pdf .acad-card__desc{color:var(--c-primary,#1a5276);font-weight:600;}
+    .dept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+    .dept-card{background:var(--grad-primary);color:#fff;border-radius:var(--r-md);padding:1.25rem;text-align:center}
+    .dept-card__icon{font-size:2rem;margin-bottom:.5rem}
+    .dept-card__name{font-family:var(--font-display);font-size:.95rem}
+    .dept-card__sub{font-size:.75rem;opacity:.75;margin-top:.3rem}
+  </style>
+</head>
+<body>
+<main>
+<div class="page-hero">
+  <div class="container page-hero__inner">
+    <div class="page-hero__badge">📚 Learning</div>
+    <h1 class="page-hero__title">Academics</h1>
+    <p class="page-hero__sub">Curriculum, routines, syllabus and academic resources for students and parents</p>
+    <nav class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Academics</span></nav>
+  </div>
+</div>
+
+<section class="page-section" id="routine">
+  <div class="container">
+    <div class="sec-header">
+      <span class="sec-badge">Quick Access</span>
+      <h2 class="sec-title">Academic Resources</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="acad-cards">
+
+      <!-- Class Routine: opens Time Table PDF from Google Drive -->
+      <button
+        class="acad-card acad-card--pdf reveal-up"
+        onclick="openPdfModal('Class Time Table 2025-26','https://drive.google.com/file/d/11DXsTOdsmOUvrV0OekugDX11M9iMLEdX/preview','https://drive.google.com/uc?export=download&id=11DXsTOdsmOUvrV0OekugDX11M9iMLEdX')">
+        <span class="acad-card__icon">🗓️</span>
+        <div class="acad-card__title">Class Routine</div>
+        <div class="acad-card__desc">👆 Click to open timetable PDF</div>
+      </button>
+
+      <!-- Syllabus: opens Syllabus PDF from Google Drive -->
+      <button
+        class="acad-card acad-card--pdf reveal-up"
+        onclick="openPdfModal('Annual Syllabus 2025-26','https://drive.google.com/file/d/18rwrWAshuzRmPTZ0FcZSukXpWy76W93J/preview','https://drive.google.com/uc?export=download&id=18rwrWAshuzRmPTZ0FcZSukXpWy76W93J')">
+        <span class="acad-card__icon">📝</span>
+        <div class="acad-card__title">Syllabus</div>
+        <div class="acad-card__desc">👆 Click to open syllabus PDF</div>
+      </button>
+
+      <!-- Results -->
+      <a href="results.html" class="acad-card reveal-up">
+        <span class="acad-card__icon">🏆</span>
+        <div class="acad-card__title">Results</div>
+        <div class="acad-card__desc">Annual exam results Class I–V</div>
+      </a>
+
+      <!-- Teachers -->
+      <a href="teachers.html" class="acad-card reveal-up">
+        <span class="acad-card__icon">👩‍🏫</span>
+        <div class="acad-card__title">Teachers</div>
+        <div class="acad-card__desc">Qualified faculty details</div>
+      </a>
+
+    </div>
+
+    <div class="sec-header" id="departments">
+      <span class="sec-badge">Subjects</span>
+      <h2 class="sec-title">Departments & Subjects</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="dept-grid">
+      <div class="dept-card reveal-up"><div class="dept-card__icon">🅰️</div><div class="dept-card__name">Assamese</div><div class="dept-card__sub">Mother Tongue (Class I–V)</div></div>
+      <div class="dept-card reveal-up"><div class="dept-card__icon">🇬🇧</div><div class="dept-card__name">English</div><div class="dept-card__sub">Second Language (Class I–V)</div></div>
+      <div class="dept-card reveal-up"><div class="dept-card__icon">➕</div><div class="dept-card__name">Mathematics</div><div class="dept-card__sub">Numeracy & Problem Solving</div></div>
+      <div class="dept-card reveal-up"><div class="dept-card__icon">🌿</div><div class="dept-card__name">Environmental Studies</div><div class="dept-card__sub">EVS (Class III–V)</div></div>
+      <div class="dept-card reveal-up"><div class="dept-card__icon">🎨</div><div class="dept-card__name">Art & Craft</div><div class="dept-card__sub">Creative Expression</div></div>
+      <div class="dept-card reveal-up"><div class="dept-card__icon">⚽</div><div class="dept-card__name">Physical Education</div><div class="dept-card__sub">Sports & Health</div></div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<script src="../config.js"></script>
+<script src="../dynamic-demo.js"></script>
+<script src="../components.js"></script>
+<script>document.addEventListener("DOMContentLoaded", () => Components.init("Academics"));</script>
+</body>
+</html>

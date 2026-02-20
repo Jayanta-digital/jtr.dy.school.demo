@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notice Board | Radhakuchi JB School</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔔</text></svg>">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/notices.css">
+  <style>
+    /* ── Marquee ticker ──────────────────────────────────────── */
+    .notice-ticker {
+      background: linear-gradient(90deg, #c0392b, #e74c3c);
+      color: #fff;
+      padding: .55rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+    .notice-ticker__label {
+      display: inline-block;
+      background: #fff;
+      color: #c0392b;
+      font-weight: 800;
+      font-size: .75rem;
+      padding: .15rem .7rem;
+      border-radius: 2rem;
+      margin-right: 1rem;
+      letter-spacing: .05em;
+      vertical-align: middle;
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+    .notice-ticker__track {
+      display: inline-block;
+      animation: tickerScroll 35s linear infinite;
+      padding-left: 120px;
+      font-size: .83rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+    }
+    .notice-ticker__track:hover { animation-play-state: paused; }
+    .notice-ticker__sep { margin: 0 1.5rem; opacity: .5; }
+    @keyframes tickerScroll {
+      0%   { transform: translateX(100vw); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ── Notice items ────────────────────────────────────────── */
+    .notice-item {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: .9rem 1.1rem;
+      border-bottom: 1px solid var(--c-border, #eef2f7);
+      transition: background .15s;
+      cursor: pointer;
+      border-radius: .5rem;
+      margin-bottom: .2rem;
+    }
+    .notice-item:hover { background: #f5f8ff; }
+    .notice-item:last-child { border-bottom: none; }
+
+    .notice-item__icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fef5f5;
+      border-radius: .6rem;
+    }
+
+    .notice-item__body { flex: 1; min-width: 0; }
+
+    .notice-item__title {
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--c-dark, #1a252f);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+      line-height: 1.4;
+    }
+    .notice-item__title:hover { color: var(--c-primary, #1a5276); text-decoration: underline; }
+
+    .notice-item__date {
+      font-size: .76rem;
+      color: var(--c-muted, #888);
+      margin-top: .25rem;
+    }
+
+    /* ── NEW badge ──────────────────────────────────────────── */
+    .badge-new {
+      display: inline-block;
+      background: #e74c3c;
+      color: #fff;
+      font-size: .62rem;
+      font-weight: 800;
+      padding: .12rem .45rem;
+      border-radius: 3rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      vertical-align: middle;
+      animation: badgePulse 1.8s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(231,76,60,.5); }
+      50%       { box-shadow: 0 0 0 5px rgba(231,76,60,0); }
+    }
+
+    /* ── Action buttons ─────────────────────────────────────── */
+    .notice-item__btns {
+      display: flex;
+      gap: .4rem;
+      flex-shrink: 0;
+    }
+    .n-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: .45rem;
+      border: 1.5px solid #dde3eb;
+      background: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background .15s, transform .12s;
+      text-decoration: none;
+    }
+    .n-btn:hover { background: #f0f4ff; transform: scale(1.08); }
+    .n-btn--view { border-color: var(--c-primary, #1a5276); color: var(--c-primary, #1a5276); }
+    .n-btn--dl   { border-color: #27ae60; color: #27ae60; }
+
+    /* ── Empty state ─────────────────────────────────────────── */
+    .notices-empty {
+      padding: 3rem;
+      text-align: center;
+      color: var(--c-muted, #888);
+    }
+    .notices-empty__icon { font-size: 3rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+<main>
+
+<!-- ══ PAGE HERO ══════════════════════════════════════════════ -->
+<div class="page-hero">
+  <div class="container page-hero__inner">
+    <div class="page-hero__badge">📢 Official Announcements</div>
+    <h1 class="page-hero__title">Notice Board</h1>
+    <p class="page-hero__sub">Circulars, examination schedules, results and official school announcements</p>
+    <nav class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Notices</span></nav>
+  </div>
+</div>
+
+<!-- ══ SCROLLING TICKER ═══════════════════════════════════════ -->
+<div class="notice-ticker" id="noticeTicker">
+  <span class="notice-ticker__label">🔔 NOTICES</span>
+  <span class="notice-ticker__track" id="tickerTrack">Loading latest notices…</span>
+</div>
+
+<!-- ══ MAIN CONTENT ═══════════════════════════════════════════ -->
+<section class="page-section">
+  <div class="container">
+    <div class="notices-layout">
+
+      <!-- Main Notices Panel -->
+      <div class="notices-main">
+        <div class="notices-toolbar">
+          <div class="notices-toolbar__left">
+            <h2 class="notices-board-title">📋 All Notices</h2>
+            <span class="notices-count" id="noticeCount">Loading…</span>
+          </div>
+          <div class="notices-toolbar__right">
+            <div class="notices-search-wrap">
+              <input type="text" id="noticeSearch" class="notices-search" placeholder="🔍 Search notices…">
+            </div>
+          </div>
+        </div>
+
+        <div class="notices-board reveal">
+          <div class="notices-board__list" id="noticeList">
+            <!-- skeleton placeholders -->
+            <div class="notice-item"><div class="notice-item__icon skeleton" style="width:42px;height:42px;border-radius:8px;"></div><div class="notice-item__body"><div class="skeleton" style="height:13px;width:75%;margin-bottom:7px;"></div><div class="skeleton" style="height:10px;width:35%;"></div></div></div>
+            <div class="notice-item"><div class="notice-item__icon skeleton" style="width:42px;height:42px;border-radius:8px;"></div><div class="notice-item__body"><div class="skeleton" style="height:13px;width:65%;margin-bottom:7px;"></div><div class="skeleton" style="height:10px;width:30%;"></div></div></div>
+            <div class="notice-item"><div class="notice-item__icon skeleton" style="width:42px;height:42px;border-radius:8px;"></div><div class="notice-item__body"><div class="skeleton" style="height:13px;width:80%;margin-bottom:7px;"></div><div class="skeleton" style="height:10px;width:40%;"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="notices-sidebar">
+        <div class="sidebar-card reveal">
+          <h4 class="sidebar-card__title">📅 School Timings</h4>
+          <ul class="sidebar-list">
+            <li><span>Mon – Fri</span><strong>10:00 AM – 4:00 PM</strong></li>
+            <li><span>Saturday</span><strong>10:00 AM – 2:00 PM</strong></li>
+            <li><span>Lunch</span><strong>12:00 – 12:30 PM</strong></li>
+            <li><span>Summer Vac.</span><strong>As per Govt. Calendar</strong></li>
+            <li><span>Holidays</span><strong>As per Govt. Calendar</strong></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4 class="sidebar-card__title">📌 Admission Info</h4>
+          <ul class="sidebar-list">
+            <li><span>Age (Class I)</span><strong>5–6 years</strong></li>
+            <li><span>Documents</span><strong>Birth Cert, Aadhaar</strong></li>
+            <li><span>Session</span><strong>April – March</strong></li>
+            <li><span>Fees</span><strong>Nil (Govt. School)</strong></li>
+            <li><span>Uniform</span><strong>Govt. Scheme</strong></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4 class="sidebar-card__title">🔗 Quick Links</h4>
+          <div class="sidebar-quicklinks">
+            <a href="results.html">📊 View Results</a>
+            <a href="academics.html">📚 Academics</a>
+            <a href="admission.html">📝 Admission</a>
+            <a href="contact.html">📞 Contact School</a>
+          </div>
+        </div>
+
+        <!-- Drive folder shortcut -->
+        <div class="sidebar-card reveal" style="background:linear-gradient(135deg,#fef9f0,#fff8f0);border:1.5px solid #f0c27f;">
+          <h4 class="sidebar-card__title" style="color:#b7770d;">📁 Notice Archive</h4>
+          <p style="font-size:.78rem;color:#8d6015;margin:.4rem 0 .8rem;">Access all notices directly from our Google Drive folder.</p>
+          <a href="https://drive.google.com/drive/folders/197N380ywXB3FLF7EaON9bHiZner7e6uW"
+             target="_blank" rel="noopener"
+             style="display:inline-block;background:#e67e22;color:#fff;padding:.45rem 1rem;border-radius:.5rem;font-size:.8rem;font-weight:700;text-decoration:none;">
+            📂 Open Drive Folder →
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+</main>
+
+<script src="../config.js"></script>
+<script src="../dynamic-demo.js"></script>
+<script src="../components.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  Components.init("Notice Board");
+  loadNotices();
+});
+
+let allNotices = [];
+
+/* ── Helper: convert Drive share link → preview/download URLs ── */
+function driveToPreview(link) {
+  if (!link) return null;
+  const m = link.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  // Use /preview — renders inside iframe without Google account selector
+  if (m) return `https://drive.google.com/file/d/${m[1]}/preview`;
+  if (link.includes('/folders/')) return link;
+  return link;
+}
+function driveToDownload(link) {
+  if (!link) return null;
+  const m = link.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  // confirm=1 forces direct download without account picker prompt
+  if (m) return `https://drive.google.com/uc?export=download&confirm=1&id=${m[1]}`;
+  return link;
+}
+
+/* ── isNew: returns true if within 30 days of given date ─────── */
+function isRecent(dateStr) {
+  if (!dateStr) return false;
+  return (Date.now() - new Date(dateStr)) / 86400000 <= 30;
+}
+
+/* ── Load notices from config ────────────────────────────────── */
+function loadNotices() {
+  const cfg = SCHOOL_CONFIG.notices;
+  allNotices = [];
+
+  if (cfg.source === "drive" && cfg.driveFiles && cfg.driveFiles.length) {
+    allNotices = cfg.driveFiles.map(n => ({
+      title:       n.title,
+      date:        n.date,
+      viewUrl:     driveToPreview(n.driveLink),
+      downloadUrl: driveToDownload(n.driveLink),
+      isFolder:    n.driveLink && n.driveLink.includes('/folders/'),
+      rawLink:     n.driveLink,
+    }));
+  } else if (cfg.source === "hosted" && cfg.hostedFiles) {
+    allNotices = cfg.hostedFiles.map(n => ({
+      title:       n.title,
+      date:        n.date,
+      viewUrl:     n.file,
+      downloadUrl: n.file,
+      isFolder:    false,
+      rawLink:     n.file,
+    }));
+  }
+
+  // Sort newest first
+  allNotices.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Mark first 4 notices as "top" — these always show red badge
+  allNotices.forEach((n, i) => { n.isTop4 = i < 4; });
+
+  renderNotices(allNotices);
+  buildTicker(allNotices);
+
+  document.getElementById("noticeSearch").addEventListener("input", e => {
+    const q = e.target.value.toLowerCase().trim();
+    renderNotices(q ? allNotices.filter(n => n.title.toLowerCase().includes(q)) : allNotices);
+  });
+}
+
+/* ── Render notice list ──────────────────────────────────────── */
+function renderNotices(list) {
+  const el    = document.getElementById("noticeList");
+  const count = document.getElementById("noticeCount");
+  count.textContent = `${list.length} notice${list.length !== 1 ? "s" : ""}`;
+
+  if (!list.length) {
+    el.innerHTML = `
+      <div class="notices-empty">
+        <div class="notices-empty__icon">🔍</div>
+        <p>No notices found.</p>
+      </div>`;
+    return;
+  }
+
+  el.innerHTML = list.map(n => {
+    // Show badge if: within 30 days OR in top 4
+    const showBadge = isRecent(n.date) || n.isTop4;
+    const badge     = showBadge ? `<span class="badge-new">New</span>` : "";
+
+    // Always build view button — folder opens in new tab, file opens in PDF modal
+    const viewBtn = n.viewUrl
+      ? (n.isFolder
+          ? `<a href="${n.rawLink}" target="_blank" rel="noopener" class="n-btn n-btn--view" title="View in Drive">👁️</a>`
+          : `<button class="n-btn n-btn--view" onclick="openPdfModal('${esc(n.title)}','${n.viewUrl}','${n.downloadUrl || ''}')" title="Preview PDF">👁️</button>`)
+      : `<button class="n-btn n-btn--view" disabled style="opacity:.35;cursor:not-allowed" title="Not available">👁️</button>`;
+
+    // Always build download button — folder links to Drive folder, file downloads directly
+    const dlBtn = n.isFolder
+      ? `<a href="${n.rawLink}" target="_blank" rel="noopener" class="n-btn n-btn--dl" title="Open in Drive">📂</a>`
+      : (n.downloadUrl
+          ? `<a href="${n.downloadUrl}" download class="n-btn n-btn--dl" title="Download PDF">⬇️</a>`
+          : `<button class="n-btn n-btn--dl" disabled style="opacity:.35;cursor:not-allowed" title="Not available">⬇️</button>`);
+
+    const rowClick = n.isFolder
+      ? `window.open('${n.rawLink}','_blank')`
+      : (n.viewUrl ? `openPdfModal('${esc(n.title)}','${n.viewUrl}','${n.downloadUrl || ''}')` : '');
+
+    return `
+      <div class="notice-item" onclick="${rowClick}" style="${rowClick ? 'cursor:pointer' : ''}">
+        <div class="notice-item__icon">📄</div>
+        <div class="notice-item__body">
+          <div class="notice-item__title">
+            ${esc(n.title)}
+            ${badge}
+          </div>
+          <div class="notice-item__date">📅 ${fmtDate(n.date)}</div>
+        </div>
+        <div class="notice-item__btns" onclick="event.stopPropagation()">
+          ${viewBtn}
+          ${dlBtn}
+        </div>
+      </div>`;
+  }).join("");
+}
+
+/* ── Build scrolling ticker from top 6 notices ───────────────── */
+function buildTicker(list) {
+  const track = document.getElementById("tickerTrack");
+  if (!track || !list.length) return;
+  const top = list.slice(0, 6);
+  // Duplicate content so scroll feels seamless
+  const text = top.map(n => `📌 ${n.title}  ·  ${fmtDate(n.date)}`).join("     ❚❚❚     ");
+  track.textContent = text + "          " + text; // double for seamless loop
+}
+</script>
+</body>
+</html>

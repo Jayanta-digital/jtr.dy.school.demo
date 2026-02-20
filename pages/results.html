@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results | 66no Radhakuchi JB School</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/results.css">
+</head>
+<body>
+
+<main>
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container page-hero__inner">
+    <div class="page-hero__badge">🏆 Academic Records</div>
+    <h1 class="page-hero__title">Examination Results</h1>
+    <p class="page-hero__sub">Annual result PDFs for Class I to Class V · Last 3 Academic Years</p>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>›</span>
+      <a href="academics.html">Academics</a>
+      <span>›</span>
+      <span>Results</span>
+    </nav>
+  </div>
+</div>
+
+<!-- ═══ RESULTS SELECTOR ═══════════════════════════════════════ -->
+<section class="page-section">
+  <div class="container">
+
+    <!-- Selector Card -->
+    <div class="result-selector reveal">
+      <div class="result-selector__title">
+        <span class="result-selector__icon">🔍</span>
+        Select Class & Year to View Result
+      </div>
+      <div class="result-selector__controls">
+        <!-- Year Selector -->
+        <div class="selector-group">
+          <label class="selector-label">📅 Academic Year</label>
+          <div class="selector-pills" id="yearPills">
+            <!-- injected by JS -->
+          </div>
+        </div>
+
+        <!-- Class Selector -->
+        <div class="selector-group">
+          <label class="selector-label">🎒 Select Class</label>
+          <div class="selector-dropdown-wrap">
+            <select class="selector-dropdown" id="classSelect">
+              <option value="">-- Choose a Class --</option>
+              <option value="1">Class I</option>
+              <option value="2">Class II</option>
+              <option value="3">Class III</option>
+              <option value="4">Class IV</option>
+              <option value="5">Class V</option>
+            </select>
+            <span class="selector-dropdown-arrow">▾</span>
+          </div>
+        </div>
+
+        <!-- Find Button -->
+        <div class="selector-group selector-group--action">
+          <button class="btn-find" id="findResultBtn">
+            <span class="btn-find__icon">🔎</span>
+            Find Result
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result Viewer -->
+    <div class="result-viewer" id="resultViewer">
+      <div class="result-viewer__placeholder" id="viewerPlaceholder">
+        <div class="placeholder-art">📋</div>
+        <h3>Select a Class & Year above</h3>
+        <p>Choose the academic year and class, then click "Find Result" to view the PDF result.</p>
+      </div>
+
+      <div class="result-viewer__found" id="viewerFound" style="display:none">
+        <div class="result-viewer__card">
+          <div class="result-viewer__card-head">
+            <div class="result-viewer__card-info">
+              <div class="result-viewer__card-badge" id="resultBadge">2024 · Class V</div>
+              <h3 class="result-viewer__card-title" id="resultTitle">Annual Examination Result 2024</h3>
+              <p class="result-viewer__card-sub" id="resultSub">Radhakuchi JB School · Kamrup, Assam</p>
+            </div>
+            <div class="result-viewer__card-actions">
+              <button class="rvBtn rvBtn--preview" id="previewBtn">
+                👁️ Full Preview
+              </button>
+              <a class="rvBtn rvBtn--download" id="downloadBtn" href="#" download>
+                ⬇️ Download PDF
+              </a>
+            </div>
+          </div>
+          <div class="result-viewer__embed-wrap" id="embedWrap">
+            <iframe class="result-viewer__iframe" id="resultIframe" title="Result PDF" src="about:blank"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-viewer__unavail" id="viewerUnavail" style="display:none">
+        <div class="placeholder-art">📭</div>
+        <h3 id="unavailTitle">Result Not Uploaded Yet</h3>
+        <p id="unavailMsg">The result PDF for the selected class and year has not been uploaded. Please check back later or contact the school office.</p>
+        <a href="../pages/contact.html" class="btn btn--primary" style="margin-top:1rem;">📞 Contact School</a>
+      </div>
+    </div>
+
+    <!-- All Results Grid -->
+    <div class="results-all">
+      <div class="results-all__head">
+        <h2 class="sec-title">📁 All Available Results</h2>
+        <p class="sec-sub" style="text-align:left;">Browse and download all uploaded result PDFs below.</p>
+        <div class="divider" style="margin:0.75rem 0 0"></div>
+      </div>
+
+      <!-- Year Tabs -->
+      <div class="results-tabs" id="resultsTabs">
+        <!-- injected by JS -->
+      </div>
+
+      <!-- Results Grid per year -->
+      <div id="resultsGridWrap">
+        <!-- injected by JS -->
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<script src="../config.js"></script>
+<script src="../dynamic-demo.js"></script>
+<script src="../components.js"></script>
+<script src="../assets/js/results.js"></script>
+</body>
+</html>
