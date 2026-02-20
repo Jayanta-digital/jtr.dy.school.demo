@@ -1,0 +1,30 @@
+/* notices.css */
+.notices-layout{display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start}
+.notices-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.notices-board-title{font-family:var(--font-display);font-size:1.2rem;color:var(--c-primary-d)}
+.notices-count{background:rgba(26,74,138,.1);color:var(--c-primary);padding:3px 10px;border-radius:var(--r-full);font-size:.75rem;font-weight:700}
+.notices-search{padding:8px 14px;border:1.5px solid var(--c-border);border-radius:var(--r-full);font-size:.84rem;width:220px;transition:all var(--tr)}
+.notices-search:focus{border-color:var(--c-primary);box-shadow:0 0 0 3px rgba(26,74,138,.1);outline:none}
+.notices-board{background:var(--c-white);border-radius:var(--r-lg);box-shadow:var(--sh-md);border:1px solid var(--c-border);overflow:hidden}
+.notices-board__header{background:var(--grad-primary);padding:.9rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.notices-board__header h3{font-family:var(--font-display);font-size:1rem;color:#fff}
+.notices-board__list{max-height:75vh;overflow-y:auto}
+
+/* Sidebar */
+.notices-sidebar{display:flex;flex-direction:column;gap:1.25rem}
+.sidebar-card{background:var(--c-white);border-radius:var(--r-md);padding:1.25rem;box-shadow:var(--sh-md);border:1px solid var(--c-border)}
+.sidebar-card__title{font-family:var(--font-display);font-size:.95rem;color:var(--c-primary-d);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:2px solid var(--c-surface)}
+.sidebar-list{display:flex;flex-direction:column;gap:0}
+.sidebar-list li{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--c-surface);font-size:.8rem}
+.sidebar-list li:last-child{border-bottom:none}
+.sidebar-list li span{color:var(--c-muted)}
+.sidebar-list li strong{color:var(--c-text);font-weight:600;text-align:right}
+.sidebar-quicklinks{display:flex;flex-direction:column;gap:7px}
+.sidebar-quicklinks a{display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--c-primary);padding:7px 12px;border-radius:var(--r-sm);background:rgba(26,74,138,.07);transition:all var(--tr)}
+.sidebar-quicklinks a:hover{background:var(--c-primary);color:#fff}
+
+@media(max-width:900px){
+  .notices-layout{grid-template-columns:1fr}
+  .notices-sidebar{order:-1}
+  .notices-board__list{max-height:none}
+}
